@@ -832,13 +832,13 @@ async def get_monthly_report(year: int = None, authorization: str = None):
     
     return list(monthly.values())
 
-# Include the router
-app.include_router(api_router)
-
 # Root endpoint
 @api_router.get("/")
 async def root():
     return {"message": "FluxoControl API", "version": "1.0.0"}
+
+# Include the router
+app.include_router(api_router)
 
 app.add_middleware(
     CORSMiddleware,
