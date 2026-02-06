@@ -126,7 +126,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 };
 
 const Layout = ({ children }) => {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(true); // Default to open for desktop
 
     return (
         <div className="min-h-screen bg-[#0B0C15] noise-overlay">
