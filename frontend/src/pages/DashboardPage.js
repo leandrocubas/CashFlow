@@ -34,7 +34,7 @@ import { getDashboardSummary, getCashflow, getDRE, getActivities, getAIAnalysis 
 import { formatCurrency, formatDateTime, cn } from '../lib/utils';
 import { toast } from 'sonner';
 
-const CHART_COLORS = ['#6366F1', '#10B981', '#EF4444', '#F59E0B', '#8B5CF6'];
+const CHART_COLORS = ['#A3E635', '#10B981', '#EF4444', '#F59E0B', '#8B5CF6'];
 
 const StatCard = ({ title, value, subtitle, icon: Icon, trend, trendValue, color = 'primary', delay = 0 }) => (
     <motion.div

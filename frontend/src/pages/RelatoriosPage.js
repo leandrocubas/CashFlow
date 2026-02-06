@@ -35,7 +35,7 @@ import { getReportByCategory, getReportByContact, getMonthlyReport, getAIAnalysi
 import { formatCurrency, cn } from '../lib/utils';
 import { toast } from 'sonner';
 
-const CHART_COLORS = ['#6366F1', '#10B981', '#EF4444', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'];
+const CHART_COLORS = ['#A3E635', '#10B981', '#EF4444', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'];
 
 const RelatoriosPage = () => {
     const [loading, setLoading] = useState(true);
