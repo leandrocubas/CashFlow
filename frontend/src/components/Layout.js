@@ -55,10 +55,9 @@ const Sidebar = ({ isOpen, onClose }) => {
                     x: window.innerWidth >= 1024 ? 0 : (isOpen ? 0 : -280)
                 }}
                 className={cn(
-                    "fixed top-0 left-0 h-full w-64 z-50",
+                    "fixed top-0 left-0 h-screen w-64 z-50",
                     "bg-white/5 backdrop-blur-xl border-r border-white/10",
-                    "flex flex-col",
-                    "lg:translate-x-0 lg:static lg:z-auto"
+                    "flex flex-col"
                 )}
             >
                 {/* Logo */}
