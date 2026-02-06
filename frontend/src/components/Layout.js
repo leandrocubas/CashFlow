@@ -129,11 +129,11 @@ const Layout = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(true); // Default to open for desktop
 
     return (
-        <div className="min-h-screen bg-[#0B0C15] noise-overlay">
+        <div className="min-h-screen bg-[#0B0C15]">
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
             
             {/* Main content */}
-            <div className="lg:ml-64">
+            <div className="lg:ml-64 min-h-screen">
                 {/* Mobile header */}
                 <header className="lg:hidden sticky top-0 z-30 bg-[#0B0C15]/80 backdrop-blur-xl border-b border-white/10 px-4 py-3">
                     <div className="flex items-center justify-between">
