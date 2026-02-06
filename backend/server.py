@@ -250,8 +250,7 @@ async def login(credentials: UserLogin):
     )
 
 @api_router.get("/auth/me")
-async def get_me(authorization: str = None):
-    from fastapi import Header
+async def get_me(authorization: str = Header(None)):
     user = await get_current_user(authorization)
     return user
 
