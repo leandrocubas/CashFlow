@@ -50,13 +50,13 @@ const Sidebar = ({ isOpen, onClose }) => {
 
             {/* Sidebar */}
             <motion.aside
-                initial={{ x: -280 }}
+                initial={false}
                 animate={{ x: isOpen ? 0 : -280 }}
                 className={cn(
                     "fixed top-0 left-0 h-full w-64 z-50",
                     "bg-white/5 backdrop-blur-xl border-r border-white/10",
                     "flex flex-col",
-                    "lg:translate-x-0 lg:static"
+                    "lg:translate-x-0 lg:static lg:z-auto"
                 )}
             >
                 {/* Logo */}
