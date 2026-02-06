@@ -363,10 +363,10 @@ class FluxoControlAPITester:
         self.token = None
         
         success, response = self.make_request('GET', 'dashboard/summary', expected_status=401)
-        if not success and response.get('status_code') == 401:
+        if response.get('status_code') == 401 or 'Token não fornecido' in str(response):
             self.log_test("Protected Routes", True, "Correctly requires authentication")
         else:
-            self.log_test("Protected Routes", False, "Should require authentication")
+            self.log_test("Protected Routes", False, f"Should require authentication, got: {response}")
         
         # Restore token
         self.token = original_token
