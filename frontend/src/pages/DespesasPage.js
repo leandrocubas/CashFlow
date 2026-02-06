@@ -181,6 +181,24 @@ const DespesasPage = () => {
         }
     };
 
+    const handleTogglePaid = async (expense) => {
+        try {
+            const newPaidStatus = !expense.paid;
+            const data = {
+                ...expense,
+                paid: newPaidStatus,
+                paid_amount: newPaidStatus ? expense.total_amount : 0,
+                paid_date: newPaidStatus ? new Date().toISOString() : '',
+                partial_payment: false
+            };
+            await updateExpense(expense.id, data);
+            toast.success(newPaidStatus ? 'Despesa marcada como paga' : 'Despesa marcada como pendente');
+            fetchData();
+        } catch (error) {
+            toast.error('Erro ao atualizar status');
+        }
+    };
+
     const totalExpected = filteredExpenses.reduce((acc, e) => acc + e.total_amount, 0);
     const totalPaid = filteredExpenses.filter(e => e.paid).reduce((acc, e) => acc + e.paid_amount, 0);
     const fixedTotal = filteredExpenses.filter(e => e.expense_type === 'fixed').reduce((acc, e) => acc + e.total_amount, 0);
