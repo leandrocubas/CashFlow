@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-02-06T14:04:15.018555",
+  "timestamp": "2026-02-06T14:04:52.099861",
   "total_tests": 22,
-  "passed_tests": 21,
-  "success_rate": 95.45454545454545,
+  "passed_tests": 22,
+  "success_rate": 100.0,
   "test_details": [
     {
       "name": "User Registration",
       "success": true,
-      "details": "Created user: test_140358@test.com",
+      "details": "Created user: test_140437@test.com",
       "response_data": null
     },
     {
@@ -24,14 +24,14 @@
     },
     {
       "name": "Protected Routes",
-      "success": false,
-      "details": "Should require authentication",
+      "success": true,
+      "details": "Correctly requires authentication",
       "response_data": null
     },
     {
       "name": "Create Category",
       "success": true,
-      "details": "Created: Test Category 140359",
+      "details": "Created: Test Category 140437",
       "response_data": null
     },
     {
@@ -49,7 +49,7 @@
     {
       "name": "Create Contact",
       "success": true,
-      "details": "Created: Test Client 140359",
+      "details": "Created: Test Client 140437",
       "response_data": null
     },
     {
@@ -61,7 +61,7 @@
     {
       "name": "Create Revenue",
       "success": true,
-      "details": "Created: Test Revenue 140359",
+      "details": "Created: Test Revenue 140437",
       "response_data": null
     },
     {
@@ -79,7 +79,7 @@
     {
       "name": "Create Expense",
       "success": true,
-      "details": "Created: Test Expense 140359",
+      "details": "Created: Test Expense 140438",
       "response_data": null
     },
     {
@@ -109,7 +109,7 @@
     {
       "name": "Activity Log",
       "success": true,
-      "details": "Found 8 activities",
+      "details": "Found 10 activities",
       "response_data": null
     },
     {
@@ -133,7 +133,7 @@
     {
       "name": "AI Analysis",
       "success": true,
-      "details": "Generated analysis: 2549 chars",
+      "details": "Generated analysis: 2416 chars",
       "response_data": null
     }
   ]
