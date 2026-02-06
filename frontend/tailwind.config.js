@@ -17,9 +17,9 @@ module.exports = {
                 paper: '#151621',
                 subtle: '#1E1F2E',
                 primary: {
-                    DEFAULT: '#A3E635',
-                    light: '#BEF264',
-                    dark: '#84CC16',
+                    DEFAULT: '#27f48b',
+                    light: '#5ff7a8',
+                    dark: '#1bc96f',
                 },
                 success: {
                     DEFAULT: '#10B981',

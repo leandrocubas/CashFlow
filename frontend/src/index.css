@@ -11,7 +11,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 234 25% 8%;
     --popover-foreground: 210 40% 98%;
-    --primary: 82 85% 55%;
+    --primary: 153 91% 56%;
     --primary-foreground: 0 0% 0%;
     --secondary: 234 20% 14%;
     --secondary-foreground: 210 40% 98%;
@@ -27,9 +27,9 @@
     --warning-foreground: 0 0% 0%;
     --border: 0 0% 100% / 0.08;
     --input: 0 0% 100% / 0.08;
-    --ring: 82 85% 55%;
+    --ring: 153 91% 56%;
     --radius: 0.75rem;
-    --chart-1: 82 85% 55%;
+    --chart-1: 153 91% 56%;
     --chart-2: 160 84% 39%;
     --chart-3: 0 84% 60%;
     --chart-4: 38 92% 50%;
@@ -79,7 +79,7 @@ code, pre, .mono {
     }
     
     .glow-primary {
-        box-shadow: 0 0 20px rgba(163, 230, 53, 0.3);
+        box-shadow: 0 0 20px rgba(39, 244, 139, 0.3);
     }
     
     .glow-success {
@@ -127,10 +127,10 @@ code, pre, .mono {
 
 @keyframes pulse-glow {
     0%, 100% {
-        box-shadow: 0 0 5px rgba(163, 230, 53, 0.3);
+        box-shadow: 0 0 5px rgba(39, 244, 139, 0.3);
     }
     50% {
-        box-shadow: 0 0 20px rgba(163, 230, 53, 0.5);
+        box-shadow: 0 0 20px rgba(39, 244, 139, 0.5);
     }
 }
 
@@ -177,12 +177,12 @@ code, pre, .mono {
 }
 
 .rdp {
-    --rdp-accent-color: #A3E635 !important;
-    --rdp-background-color: rgba(163, 230, 53, 0.2) !important;
+    --rdp-accent-color: #27f48b !important;
+    --rdp-background-color: rgba(39, 244, 139, 0.2) !important;
 }
 
 .rdp-day_selected {
-    background-color: #A3E635 !important;
+    background-color: #27f48b !important;
     color: #000 !important;
 }
 
