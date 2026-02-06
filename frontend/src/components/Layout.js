@@ -51,7 +51,9 @@ const Sidebar = ({ isOpen, onClose }) => {
             {/* Sidebar */}
             <motion.aside
                 initial={false}
-                animate={{ x: isOpen ? 0 : -280 }}
+                animate={{ 
+                    x: window.innerWidth >= 1024 ? 0 : (isOpen ? 0 : -280)
+                }}
                 className={cn(
                     "fixed top-0 left-0 h-full w-64 z-50",
                     "bg-white/5 backdrop-blur-xl border-r border-white/10",
