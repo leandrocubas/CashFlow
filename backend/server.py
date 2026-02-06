@@ -268,7 +268,7 @@ async def get_categories(type: Optional[str] = None):
     return categories
 
 @api_router.post("/categories", response_model=Category)
-async def create_category(category_data: CategoryBase, authorization: str = None):
+async def create_category(category_data: CategoryBase, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     existing = await db.categories.find_one({"name": category_data.name, "type": category_data.type})
