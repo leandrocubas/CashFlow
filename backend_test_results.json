@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-02-06T14:02:59.241913",
+  "total_tests": 18,
+  "passed_tests": 2,
+  "success_rate": 11.11111111111111,
+  "test_details": [
+    {
+      "name": "User Registration",
+      "success": true,
+      "details": "Created user: test_140257@test.com",
+      "response_data": null
+    },
+    {
+      "name": "User Login",
+      "success": true,
+      "details": "Logged in as: admin@fluxocontrol.com",
+      "response_data": null
+    },
+    {
+      "name": "Get Current User",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Protected Routes",
+      "success": false,
+      "details": "Should require authentication",
+      "response_data": null
+    },
+    {
+      "name": "Create Category",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Create Contact",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Create Category",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Create Contact",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Create Revenue",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Create Expense",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Dashboard Summary",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Dashboard Cashflow",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Dashboard DRE",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Activity Log",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Reports by Category",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Reports by Contact",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "Monthly Reports",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    },
+    {
+      "name": "AI Analysis",
+      "success": false,
+      "details": "Failed: {'detail': 'Token n\u00e3o fornecido'}",
+      "response_data": null
+    }
+  ]
+}
