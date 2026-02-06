@@ -170,6 +170,23 @@ const ReceitasPage = () => {
         }
     };
 
+    const handleTogglePaid = async (revenue) => {
+        try {
+            const newPaidStatus = !revenue.paid;
+            const data = {
+                ...revenue,
+                paid: newPaidStatus,
+                paid_amount: newPaidStatus ? revenue.total_amount : 0,
+                paid_date: newPaidStatus ? new Date().toISOString() : ''
+            };
+            await updateRevenue(revenue.id, data);
+            toast.success(newPaidStatus ? 'Receita marcada como recebida' : 'Receita marcada como pendente');
+            fetchData();
+        } catch (error) {
+            toast.error('Erro ao atualizar status');
+        }
+    };
+
     const totalExpected = filteredRevenues.reduce((acc, r) => acc + r.total_amount, 0);
     const totalPaid = filteredRevenues.filter(r => r.paid).reduce((acc, r) => acc + r.paid_amount, 0);
 
