@@ -153,11 +153,11 @@ const Layout = ({ children }) => {
                 </header>
 
                 {/* Page content */}
-                <main className="p-4 md:p-6 lg:p-8">
+                <main className="p-4 md:p-5 lg:p-6">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.2 }}
                     >
                         {children}
                     </motion.div>
