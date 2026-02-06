@@ -349,7 +349,18 @@ const DespesasPage = () => {
                                                 </Badge>
                                             </TableCell>
                                             <TableCell className="text-right">
-                                                <div className="flex justify-end gap-2">
+                                                <div className="flex items-center justify-end gap-3">
+                                                    <div className="flex items-center gap-2">
+                                                        <Switch
+                                                            checked={expense.paid}
+                                                            onCheckedChange={() => handleTogglePaid(expense)}
+                                                            data-testid={`toggle-paid-${expense.id}`}
+                                                            className="data-[state=checked]:bg-success"
+                                                        />
+                                                        <span className="text-xs text-slate-500 hidden sm:inline">
+                                                            {expense.paid ? 'Pago' : 'Pendente'}
+                                                        </span>
+                                                    </div>
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
