@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, Search, Trash2, Edit, Loader2 } from 'lucide-react';
+import { Plus, Search, Trash2, Edit, Loader2, Check } from 'lucide-react';
 import Layout from '../components/Layout';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
