@@ -1,13 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import {
-    Plus,
-    Search,
-    Trash2,
-    Edit,
-    Loader2,
-    TrendingDown
-} from 'lucide-react';
+import { Plus, Search, Trash2, Edit, Loader2 } from 'lucide-react';
 import Layout from '../components/Layout';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -21,6 +13,7 @@ import { Badge } from '../components/ui/badge';
 import { ScrollArea } from '../components/ui/scroll-area';
 import { Calendar } from '../components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
+import { CreatableSelect } from '../components/ui/creatable-select';
 import { getExpenses, createExpense, updateExpense, deleteExpense, getCategories, createCategory, getContacts, createContact } from '../services/api';
 import { formatCurrency, formatDate, getExpenseTypeLabel, cn } from '../lib/utils';
 import { toast } from 'sonner';
@@ -73,8 +66,6 @@ const DespesasPage = () => {
     const [filterType, setFilterType] = useState('all');
     const [saving, setSaving] = useState(false);
     const [datePickerOpen, setDatePickerOpen] = useState(false);
-    const [newCategoryInput, setNewCategoryInput] = useState('');
-    const [newContactInput, setNewContactInput] = useState('');
 
     useEffect(() => {
         fetchData();
@@ -123,29 +114,27 @@ const DespesasPage = () => {
         setDialogOpen(true);
     };
 
-    const handleCreateCategory = async () => {
-        if (!newCategoryInput.trim()) return;
+    const handleCreateCategory = async (name) => {
         try {
-            const res = await createCategory({ name: newCategoryInput.trim(), type: 'expense' });
+            const res = await createCategory({ name, type: 'expense' });
             setCategories([...categories, res.data]);
-            setFormData({ ...formData, category_id: res.data.id, category_name: res.data.name });
-            setNewCategoryInput('');
             toast.success('Categoria criada');
+            return res.data;
         } catch (error) {
             toast.error('Erro ao criar categoria');
+            return null;
         }
     };
 
-    const handleCreateContact = async () => {
-        if (!newContactInput.trim()) return;
+    const handleCreateContact = async (name) => {
         try {
-            const res = await createContact({ name: newContactInput.trim(), type: 'supplier' });
+            const res = await createContact({ name, type: 'supplier' });
             setContacts([...contacts, res.data]);
-            setFormData({ ...formData, contact_id: res.data.id, contact_name: res.data.name });
-            setNewContactInput('');
             toast.success('Fornecedor criado');
+            return res.data;
         } catch (error) {
             toast.error('Erro ao criar fornecedor');
+            return null;
         }
     };
 
@@ -422,66 +411,28 @@ const DespesasPage = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label className="text-slate-300">Fornecedor *</Label>
-                                    <Select 
-                                        value={formData.contact_id} 
-                                        onValueChange={(val) => {
-                                            const contact = contacts.find(c => c.id === val);
-                                            setFormData({ ...formData, contact_id: val, contact_name: contact?.name || '' });
-                                        }}
-                                    >
-                                        <SelectTrigger className="bg-black/20 border-white/10 text-white" data-testid="expense-contact-select">
-                                            <SelectValue placeholder="Selecione ou crie" />
-                                        </SelectTrigger>
-                                        <SelectContent className="bg-paper border-white/10">
-                                            {contacts.map(c => (
-                                                <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                    <div className="flex gap-2">
-                                        <Input
-                                            placeholder="Novo fornecedor..."
-                                            value={newContactInput}
-                                            onChange={(e) => setNewContactInput(e.target.value)}
-                                            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleCreateContact())}
-                                            className="bg-black/20 border-white/10 text-white text-sm"
-                                        />
-                                        <Button type="button" size="sm" onClick={handleCreateContact} className="bg-primary/20 text-primary hover:bg-primary/30">
-                                            <Plus className="w-4 h-4" />
-                                        </Button>
-                                    </div>
+                                    <CreatableSelect
+                                        options={contacts}
+                                        value={formData.contact_id}
+                                        onChange={(opt) => setFormData({ ...formData, contact_id: opt.id, contact_name: opt.name })}
+                                        onCreateNew={handleCreateContact}
+                                        placeholder="Selecione ou digite para criar..."
+                                        createMessage="Criar fornecedor"
+                                        data-testid="expense-contact-select"
+                                    />
                                 </div>
 
                                 <div className="space-y-2">
                                     <Label className="text-slate-300">Categoria *</Label>
-                                    <Select 
-                                        value={formData.category_id} 
-                                        onValueChange={(val) => {
-                                            const cat = categories.find(c => c.id === val);
-                                            setFormData({ ...formData, category_id: val, category_name: cat?.name || '' });
-                                        }}
-                                    >
-                                        <SelectTrigger className="bg-black/20 border-white/10 text-white" data-testid="expense-category-select">
-                                            <SelectValue placeholder="Selecione ou crie" />
-                                        </SelectTrigger>
-                                        <SelectContent className="bg-paper border-white/10">
-                                            {categories.map(c => (
-                                                <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                    <div className="flex gap-2">
-                                        <Input
-                                            placeholder="Nova categoria..."
-                                            value={newCategoryInput}
-                                            onChange={(e) => setNewCategoryInput(e.target.value)}
-                                            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleCreateCategory())}
-                                            className="bg-black/20 border-white/10 text-white text-sm"
-                                        />
-                                        <Button type="button" size="sm" onClick={handleCreateCategory} className="bg-primary/20 text-primary hover:bg-primary/30">
-                                            <Plus className="w-4 h-4" />
-                                        </Button>
-                                    </div>
+                                    <CreatableSelect
+                                        options={categories}
+                                        value={formData.category_id}
+                                        onChange={(opt) => setFormData({ ...formData, category_id: opt.id, category_name: opt.name })}
+                                        onCreateNew={handleCreateCategory}
+                                        placeholder="Selecione ou digite para criar..."
+                                        createMessage="Criar categoria"
+                                        data-testid="expense-category-select"
+                                    />
                                 </div>
                             </div>
 
