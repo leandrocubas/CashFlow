@@ -284,7 +284,7 @@ async def create_category(category_data: CategoryBase, authorization: str = Head
     return category
 
 @api_router.delete("/categories/{category_id}")
-async def delete_category(category_id: str, authorization: str = None):
+async def delete_category(category_id: str, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     result = await db.categories.delete_one({"id": category_id})
     if result.deleted_count == 0:
@@ -306,7 +306,7 @@ async def get_contacts(type: Optional[str] = None):
     return contacts
 
 @api_router.post("/contacts", response_model=Contact)
-async def create_contact(contact_data: ContactBase, authorization: str = None):
+async def create_contact(contact_data: ContactBase, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     existing = await db.contacts.find_one({"name": contact_data.name, "type": contact_data.type})
@@ -322,7 +322,7 @@ async def create_contact(contact_data: ContactBase, authorization: str = None):
     return contact
 
 @api_router.delete("/contacts/{contact_id}")
-async def delete_contact(contact_id: str, authorization: str = None):
+async def delete_contact(contact_id: str, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     result = await db.contacts.delete_one({"id": contact_id})
     if result.deleted_count == 0:
@@ -351,7 +351,7 @@ async def get_revenues(paid: Optional[bool] = None, start_date: Optional[str] = 
     return revenues
 
 @api_router.post("/revenues", response_model=Revenue)
-async def create_revenue(revenue_data: RevenueBase, authorization: str = None):
+async def create_revenue(revenue_data: RevenueBase, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     revenue = Revenue(**revenue_data.model_dump())
@@ -372,7 +372,7 @@ async def create_revenue(revenue_data: RevenueBase, authorization: str = None):
     return revenue
 
 @api_router.put("/revenues/{revenue_id}", response_model=Revenue)
-async def update_revenue(revenue_id: str, revenue_data: RevenueBase, authorization: str = None):
+async def update_revenue(revenue_id: str, revenue_data: RevenueBase, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     existing = await db.revenues.find_one({"id": revenue_id}, {"_id": 0})
@@ -400,7 +400,7 @@ async def update_revenue(revenue_id: str, revenue_data: RevenueBase, authorizati
     return Revenue(**updated)
 
 @api_router.delete("/revenues/{revenue_id}")
-async def delete_revenue(revenue_id: str, authorization: str = None):
+async def delete_revenue(revenue_id: str, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     result = await db.revenues.delete_one({"id": revenue_id})
     if result.deleted_count == 0:
@@ -431,7 +431,7 @@ async def get_expenses(paid: Optional[bool] = None, expense_type: Optional[str] 
     return expenses
 
 @api_router.post("/expenses", response_model=Expense)
-async def create_expense(expense_data: ExpenseBase, authorization: str = None):
+async def create_expense(expense_data: ExpenseBase, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     expense = Expense(**expense_data.model_dump())
@@ -452,7 +452,7 @@ async def create_expense(expense_data: ExpenseBase, authorization: str = None):
     return expense
 
 @api_router.put("/expenses/{expense_id}", response_model=Expense)
-async def update_expense(expense_id: str, expense_data: ExpenseBase, authorization: str = None):
+async def update_expense(expense_id: str, expense_data: ExpenseBase, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     existing = await db.expenses.find_one({"id": expense_id}, {"_id": 0})
@@ -480,7 +480,7 @@ async def update_expense(expense_id: str, expense_data: ExpenseBase, authorizati
     return Expense(**updated)
 
 @api_router.delete("/expenses/{expense_id}")
-async def delete_expense(expense_id: str, authorization: str = None):
+async def delete_expense(expense_id: str, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     result = await db.expenses.delete_one({"id": expense_id})
     if result.deleted_count == 0:
@@ -491,7 +491,7 @@ async def delete_expense(expense_id: str, authorization: str = None):
 # ========== DASHBOARD ROUTES ==========
 
 @api_router.get("/dashboard/summary")
-async def get_dashboard_summary(authorization: str = None):
+async def get_dashboard_summary(authorization: str = Header(None)):
     await get_current_user(authorization)
     
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -540,7 +540,7 @@ async def get_dashboard_summary(authorization: str = None):
     }
 
 @api_router.get("/dashboard/cashflow")
-async def get_cashflow(months: int = 6, authorization: str = None):
+async def get_cashflow(months: int = 6, authorization: str = Header(None)):
     await get_current_user(authorization)
     
     today = datetime.now(timezone.utc)
@@ -591,7 +591,7 @@ async def get_cashflow(months: int = 6, authorization: str = None):
     return list(cashflow.values())
 
 @api_router.get("/dashboard/dre")
-async def get_dre(authorization: str = None):
+async def get_dre(authorization: str = Header(None)):
     await get_current_user(authorization)
     
     today = datetime.now(timezone.utc)
@@ -639,7 +639,7 @@ async def get_dre(authorization: str = None):
 # ========== ACTIVITY LOG ROUTES ==========
 
 @api_router.get("/activities")
-async def get_activities(limit: int = 20, authorization: str = None):
+async def get_activities(limit: int = 20, authorization: str = Header(None)):
     await get_current_user(authorization)
     activities = await db.activity_logs.find({}, {"_id": 0}).sort("created_at", -1).to_list(limit)
     for act in activities:
@@ -650,7 +650,7 @@ async def get_activities(limit: int = 20, authorization: str = None):
 # ========== AI ANALYSIS ROUTES ==========
 
 @api_router.post("/analysis/ai")
-async def get_ai_analysis(request: AIAnalysisRequest, authorization: str = None):
+async def get_ai_analysis(request: AIAnalysisRequest, authorization: str = Header(None)):
     await get_current_user(authorization)
     
     emergent_key = os.environ.get('EMERGENT_LLM_KEY')
@@ -746,7 +746,7 @@ async def get_ai_analysis(request: AIAnalysisRequest, authorization: str = None)
 # ========== REPORTS ROUTES ==========
 
 @api_router.get("/reports/by-category")
-async def get_report_by_category(type: str = "revenue", authorization: str = None):
+async def get_report_by_category(type: str = "revenue", authorization: str = Header(None)):
     await get_current_user(authorization)
     
     if type == "revenue":
@@ -766,7 +766,7 @@ async def get_report_by_category(type: str = "revenue", authorization: str = Non
     return list(by_category.values())
 
 @api_router.get("/reports/by-contact")
-async def get_report_by_contact(type: str = "revenue", authorization: str = None):
+async def get_report_by_contact(type: str = "revenue", authorization: str = Header(None)):
     await get_current_user(authorization)
     
     if type == "revenue":
@@ -786,7 +786,7 @@ async def get_report_by_contact(type: str = "revenue", authorization: str = None
     return list(by_contact.values())
 
 @api_router.get("/reports/monthly")
-async def get_monthly_report(year: int = None, authorization: str = None):
+async def get_monthly_report(year: int = None, authorization: str = Header(None)):
     await get_current_user(authorization)
     
     if not year:
